@@ -1,10 +1,13 @@
 -- 1. show all columns and rows in the table
+
 select * from salaries;
 
 -- 2. show only the EmployeeName and JobTitle columns
+
 select EmployeeName, JobTitle from salaries;
 
 -- 3. show the number of employees in the table
+
 select count(*) from salaries;
 
 -- 4. show the unique job titles in the table
