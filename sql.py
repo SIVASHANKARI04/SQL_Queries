@@ -9,10 +9,10 @@ import plotly.express as px
 # Function to connect to MySQL database
 def get_db_connection():
     return mysql.connector.connect(
-        host="localhost",  
-        user="root",
-        password="pocket",
-        database="sfsaleries",
+        host="database-2.ctc8c66sc4zs.ap-south-1.rds.amazonaws.com",  # Update with your AWS RDS endpoint
+        user="admin",
+        password="pocketpocket",
+        database="AWSSQL",
         port=3306
     )
 
@@ -63,17 +63,17 @@ selected_query = st.selectbox("Select a query to visualize:", query_options)
 # SQL Queries
 queries = {
     "Top 10 highest salaries": 
-        "SELECT EmployeeName, JobTitle, TotalPay FROM salaries ORDER BY TotalPay DESC LIMIT 10;",
+        "SELECT EmployeeName, JobTitle, TotalPay FROM Salaries1 ORDER BY TotalPay DESC LIMIT 10;",
     "Average salary by job title": 
-        "SELECT JobTitle, AVG(TotalPay) AS AvgSalary FROM salaries GROUP BY JobTitle ORDER BY AvgSalary DESC;",
+        "SELECT JobTitle, AVG(TotalPay) AS AvgSalary FROM Salaries1 GROUP BY JobTitle ORDER BY AvgSalary DESC;",
     "All employees ordered by their total pay benefits in descending order": 
-        "select EmployeeName,TotalPayBenefits from salaries order by TotalPayBenefits desc;",
+        "select EmployeeName,TotalPayBenefits from Salaries1 order by TotalPayBenefits desc;",
     "List job titles with an average base pay ≥ $100K, ordered by pay (highest first)":
-        "select JobTitle,avg(BasePay) as Avg_BasePay from salaries group by JobTitle having Avg_BasePay >= 100000 order by Avg_BasePay desc",
+        "select JobTitle,avg(BasePay) as Avg_BasePay from Salaries1 group by JobTitle having Avg_BasePay >= 100000 order by Avg_BasePay desc",
     "Total compensation per year": 
-        "SELECT Year, SUM(TotalPayBenefits) AS TotalCompensation FROM salaries GROUP BY Year ORDER BY Year;",
+        "SELECT Year, SUM(TotalPayBenefits) AS TotalCompensation FROM Salaries1 GROUP BY Year ORDER BY Year;",
     "Employees with highest overtime percentage": 
-        "SELECT EmployeeName, (OvertimePay / TotalPay) * 100 AS OvertimePercentage FROM salaries ORDER BY OvertimePercentage DESC LIMIT 10;"
+        "SELECT EmployeeName, (OvertimePay / TotalPay) * 100 AS OvertimePercentage FROM Salaries1 ORDER BY OvertimePercentage DESC LIMIT 10;"
 }
 
 # Execute selected query
@@ -123,3 +123,4 @@ if selected_query:
         st.warning("No data available for this query.")
 
 st.text("Thank you for using the dashboard!")
+
